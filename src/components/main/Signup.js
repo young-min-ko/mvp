@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import axios from 'axios';
 
 const Signup = ()=>{
   const [signupInfo, setSignupInfo] = useState(['','','','','','','']) // 0 firstName, 1 lastName, 2 email, 3 userName, 4 password, 5 pasword check, 6 moto,
@@ -33,7 +34,9 @@ const Signup = ()=>{
   }
 
   // onsubmit
-  const onSubmitSignup = ()=>{
+  const onSubmitSignup = (e)=>{
+    e.preventDefault();
+    // gating user input
     if (signupInfo[0].length === 0) {
       alert('please type in your first name!');
       return;
@@ -46,6 +49,17 @@ const Signup = ()=>{
       alert('please type in your email!');
       return;
     }
+    let emailArr = signupInfo[2].split('@')
+    if (emailArr.length === 2) {
+      if (emailArr[1].split('.').length !== 2) {
+        alert('please type a valid email');
+        return;
+      }
+    }
+    if (emailArr.length < 2 || emailArr.length > 2) {
+      alert('please type a valid email');
+      return;
+    }
     if (signupInfo[3].length < 5) {
       alert('user name should be at least 5 characters long');
       return;
@@ -55,13 +69,25 @@ const Signup = ()=>{
       return;
     }
     if (signupInfo[4] !== signupInfo[5]) {
-      alert('your password do not match, confirm your password again!');
+      alert('your passwords do not match, confirm your password again!');
       return;
     }
     if (signupInfo[5].legnth === 0) {
       alert('please type in your moto!')
       return;
     }
+    // body input
+    let body = {firstName: signupInfo[0], lastName: signupInfo[1], email: signupInfo[2], userName: signupInfo[3], password: signupInfo[4], moto: signupInfo[5]};
+
+    axios.post('/signup', body)
+    .then((res)=>{
+      console.log(res);
+      alert('signup successful!');
+    })
+    .catch((err)=>{
+      console.log('error', err)
+      alert('sign up failed');
+    })
   }
 
   return (
