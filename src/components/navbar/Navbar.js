@@ -2,8 +2,10 @@
 const Navbar = () =>{
 
   return (
-    <div>
-      hello this is navbar
+    <div className="navbar">
+      <h1>
+        hello this is navbar
+        </h1>
     </div>
   )
 }

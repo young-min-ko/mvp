@@ -2,7 +2,7 @@
 const Profile = () =>{
 
   return (
-    <div>
+    <div className="profile">
       <h1>name</h1>
       <h1>@username</h1>
       <h1>description</h1>

@@ -2,7 +2,7 @@
 const TopCommunity = ()=>{
 
   return (
-    <div>
+    <div className="top-community">
       <h1>Top 5 communities</h1>
       <h4>1. something</h4>
       <h4>2. something</h4>

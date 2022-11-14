@@ -1,0 +1,47 @@
+.username-input {
+  display: block;
+}
+
+.password-input {
+  display: block;
+}
+
+.main {
+  background-color: gray;
+  width: 60vw;
+  height: auto;
+}
+
+.navbar {
+  background-color: gray;
+  width: 100vw;
+  display: flex;
+  margin: auto;
+}
+
+.profile {
+  background-color: green;
+  width: 30vw;
+  display: block;
+}
+
+.top-community {
+  background-color: blue;
+  width: 30vw;
+}
+
+.main-page {
+  display: flex;
+  padding: 3vw;
+}
+
+.left-side {
+  width: 30vw;
+  display: block;
+}
+
+.right-side {
+  width: 60 vw;
+  display: inline-flex;
+  margin: 3vw;
+}/*# sourceMappingURL=style.css.map */

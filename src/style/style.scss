@@ -4,3 +4,18 @@
 @import './TopCommunity';
 
 
+.main-page {
+  display: flex;
+  padding:3vw;
+}
+
+.left-side {
+  width: 30vw;
+  display: block;
+}
+
+.right-side {
+  width: 60 vw;
+  display: inline-flex;
+  margin: 3vw;
+}
