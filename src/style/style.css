@@ -11,6 +11,9 @@
   width: 60vw;
   height: auto;
 }
+.main label {
+  display: block;
+}
 
 .navbar {
   background-color: gray;
