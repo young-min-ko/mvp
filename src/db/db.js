@@ -17,7 +17,7 @@ pool.connect((err)=>{
 
 const dbfindUser = (req, res)=>{
   console.log(req.body);
-  let queryString = 'SELECT username, password FROM users WHERE username = $1'
+  let queryString = 'SELECT id, password FROM users WHERE username = $1'
   return pool.query(queryString,[req.body.userName])
   .then((data)=>{
     console.log('searched for user');

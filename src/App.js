@@ -9,6 +9,7 @@ import Main from './components/main/Main.js';
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
+  const [currentPage, setCurrentPage] = useState('main');
   const [topCommunity, setTopCommunity] = useState([{name: 'wow', count: 4}, {name: 'wow2', count: 3}, {name: 'wow3', count: 2}, {name: 'wow4', count: 1}, {name: 'wow5', count: 0}]);
 
   const getTopcommunity = ()=>{

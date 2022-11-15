@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const {pool, dbfindUser} = require('../db/db.js');
-const {dbLogin, dbSignup} = require('../db/controllers/post.js');
+const {dbLogin, dbSignup, dbSessionId} = require('../db/controllers/post.js');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../../build")))
@@ -20,7 +20,7 @@ app.post('/signup', (req, res)=>{
     if (data.rows.length !== 0) {
       res.status(401).end('username exists');
     } else {
-      let saltWord = String.fromCharCode(Math.floor(Math.random()*65535), Math.floor(Math.random()*65535), Math.floor(Math.random()*65535), Math.floor(Math.random()*65535))
+      let saltWord = String.fromCharCode(Math.floor(Math.random()*65535), Math.floor(Math.random()*65535), Math.floor(Math.random()*65535), Math.floor(Math.random()*65535));
       return argon2.hash(req.body.password, saltWord)
       .then((password)=>{
         console.log(password);
@@ -41,6 +41,8 @@ app.post('/signup', (req, res)=>{
 app.post('/login', (req, res)=>{
   dbfindUser(req, res)
   .then(data=>{
+    console.log(data);
+    req.body.id = data.rows[0].id
     console.log(data.rows[0].password);
     return argon2.verify(data.rows[0].password, req.body.password)
     .then((data)=>{

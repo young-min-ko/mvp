@@ -77,10 +77,11 @@ const Signup = ({setShowMain, setUserInfo})=>{
       return;
     }
     // body input
-    let body = {firstName: signupInfo[0], lastName: signupInfo[1], email: signupInfo[2], userName: signupInfo[3], password: signupInfo[4], moto: signupInfo[5]};
+    let body = {firstName: signupInfo[0], lastName: signupInfo[1], email: signupInfo[2], userName: signupInfo[3], password: signupInfo[4], moto: signupInfo[6]};
     return axios.post('/signup', body)
     .then((res)=>{
-      console.log(res);
+      console.log(res.data);
+      setUserInfo(res.data);
       alert('signup successful!');
     })
     .catch((err)=>{
