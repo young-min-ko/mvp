@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-const Signup = ()=>{
+const Signup = ({setShowMain, showMain, setLoginStatus})=>{
   const [signupInfo, setSignupInfo] = useState(['','','','','','','']) // 0 firstName, 1 lastName, 2 email, 3 userName, 4 password, 5 pasword check, 6 moto,
 
   // onchange
@@ -78,18 +78,27 @@ const Signup = ()=>{
     }
     // body input
     let body = {firstName: signupInfo[0], lastName: signupInfo[1], email: signupInfo[2], userName: signupInfo[3], password: signupInfo[4], moto: signupInfo[5]};
-
-    axios.post('/signup', body)
+    return axios.post('/signup', body)
     .then((res)=>{
       console.log(res);
+      setLoginStatus('true');
       alert('signup successful!');
     })
     .catch((err)=>{
       console.log('error', err)
-      alert('sign up failed');
+      alert(err.response.data);
     })
+    .then(()=>{
+      setShowMain([false, false, true]);
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
   }
 
+  const onClickGoBack = ()=>{
+    setShowMain([true,false,true]);
+  }
   return (
     <div>
       <form onSubmit={onSubmitSignup}>
@@ -115,6 +124,7 @@ const Signup = ()=>{
           <input placeholder="moto" type="text" value={signupInfo[6]} onChange={onChangeSignup}></input>
         </label>
         <input type="submit"></input>
+        <button onClick={onClickGoBack}>go back</button>
       </form>
     </div>
   )

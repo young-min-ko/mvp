@@ -1,5 +1,7 @@
 import {useState} from 'react';
-const Login = ()=> {
+import axios from 'axios';
+
+const Login = ({setShowMain})=> {
   const [loginInfo, setLoginInfo] = useState(['','']);
 
   // onchange
@@ -26,6 +28,21 @@ const Login = ()=> {
       alert('please type a valid password');
       return;
     }
+    let body = {userName: loginInfo[0], password: loginInfo[1]};
+
+    axios.post('/login', body)
+    .then((res)=>{
+      console.log(res);
+      setShowMain([false, false, true]);
+      alert('login success!');
+    })
+    .catch((err)=>{
+      alert(err.response.data);
+    })
+  }
+
+  const onClickSignup = ()=>{
+    setShowMain([false, true, false]);
   }
   return (
     <div>
@@ -35,6 +52,7 @@ const Login = ()=> {
       </label>
       <label className='password-input'>password:
         <input placeholder="password" type="password" onChange={onChangeLogin}></input>
+        <button onClick={onClickSignup}>signup</button>
       </label>
     </div>
   )

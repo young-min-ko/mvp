@@ -15,6 +15,21 @@ pool.connect((err)=>{
   console.log(`connected to ${process.env.DB} host: ${process.env.HOST} port: ${process.env.DBPORT}`)
 })
 
+const dbfindUser = (req, res)=>{
+  console.log(req.body);
+  let queryString = 'SELECT username, password FROM users WHERE username = $1'
+  return pool.query(queryString,[req.body.userName])
+  .then((data)=>{
+    console.log('searched for user');
+    return data
+  })
+  .catch((err)=>{
+    console.log('error searching user');
+    return err;
+  })
+}
+
 module.exports = {
-  pool
+  pool,
+  dbfindUser,
 }
