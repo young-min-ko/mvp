@@ -28,7 +28,7 @@ const Login = ({setShowMain, setUserInfo})=> {
       alert('please type a valid password');
       return;
     }
-    let body = {userName: loginInfo[0], password: loginInfo[1]};
+    let body = {username: loginInfo[0], password: loginInfo[1]};
 
     axios.post('/login', body)
     .then((res)=>{
@@ -41,7 +41,12 @@ const Login = ({setShowMain, setUserInfo})=> {
       alert(err.response.data);
     })
     .then((data)=>{
-      setUserInfo(data);
+      if(typeof data === 'object'){
+        setUserInfo(data);
+      }
+    })
+    .catch((err)=> {
+      console.log(err);
     })
   }
 

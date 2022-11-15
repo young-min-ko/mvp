@@ -2,7 +2,7 @@ import {useState} from 'react';
 import axios from 'axios';
 
 const Signup = ({setShowMain, setUserInfo})=>{
-  const [signupInfo, setSignupInfo] = useState(['','','','','','','']) // 0 firstName, 1 lastName, 2 email, 3 userName, 4 password, 5 pasword check, 6 moto,
+  const [signupInfo, setSignupInfo] = useState(['','','','','','','']) // 0 first_name, 1 lastName, 2 email, 3 userName, 4 password, 5 pasword check, 6 moto,
 
   // onchange
   const onChangeSignup = (e)=>{
@@ -77,7 +77,7 @@ const Signup = ({setShowMain, setUserInfo})=>{
       return;
     }
     // body input
-    let body = {firstName: signupInfo[0], lastName: signupInfo[1], email: signupInfo[2], userName: signupInfo[3], password: signupInfo[4], moto: signupInfo[6]};
+    let body = {first_name: signupInfo[0], last_name: signupInfo[1], email: signupInfo[2], username: signupInfo[3], password: signupInfo[4], moto: signupInfo[6]};
     return axios.post('/signup', body)
     .then((res)=>{
       console.log(res.data);
