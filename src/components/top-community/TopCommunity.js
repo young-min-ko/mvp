@@ -1,14 +1,15 @@
+import Ranks from './Ranks.js'
 
-const TopCommunity = ()=>{
+const TopCommunity = ({topCommunity})=>{
 
   return (
     <div className="top-community">
-      <h1>Top 5 communities</h1>
-      <h4>1. something</h4>
-      <h4>2. something</h4>
-      <h4>3. something</h4>
-      <h4>4. something</h4>
-      <h4>5. something</h4>
+      <h1>Top community ranking</h1>
+      <ol>
+        {topCommunity.length !== 0 ? topCommunity.map((community)=>{
+          return <Ranks community={community}/>
+        }): null}
+      </ol>
     </div>
   )
 }

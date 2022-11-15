@@ -4,13 +4,12 @@ import Signup from './Signup.js';
 import {useState} from 'react';
 
 
-const Main = ()=>{
+const Main = ({setUserInfo})=>{
   const [showMain, setShowMain] = useState([true, false, true]) //login, signup, posts
-  const [loginStatus, setLoginStatus] = useState(false);
   return (
     <div className="main">
-      {showMain[0] ? <Login setShowMain={setShowMain} setLoginStatus={setLoginStatus}/>: null}
-      {showMain[1] ? <Signup setShowMain={setShowMain} showMain={showMain} setLoginStatus={setLoginStatus}/>: null}
+      {showMain[0] ? <Login setShowMain={setShowMain} setUserInfo={setUserInfo}/>: null}
+      {showMain[1] ? <Signup setShowMain={setShowMain} setUserInfo={setUserInfo}/>: null}
       {showMain[2] ? <Post />: null}
     </div>
   )

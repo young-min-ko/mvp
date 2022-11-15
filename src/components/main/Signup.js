@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-const Signup = ({setShowMain, showMain, setLoginStatus})=>{
+const Signup = ({setShowMain, setUserInfo})=>{
   const [signupInfo, setSignupInfo] = useState(['','','','','','','']) // 0 firstName, 1 lastName, 2 email, 3 userName, 4 password, 5 pasword check, 6 moto,
 
   // onchange
@@ -81,7 +81,6 @@ const Signup = ({setShowMain, showMain, setLoginStatus})=>{
     return axios.post('/signup', body)
     .then((res)=>{
       console.log(res);
-      setLoginStatus('true');
       alert('signup successful!');
     })
     .catch((err)=>{

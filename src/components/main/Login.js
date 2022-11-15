@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-const Login = ({setShowMain})=> {
+const Login = ({setShowMain, setUserInfo})=> {
   const [loginInfo, setLoginInfo] = useState(['','']);
 
   // onchange
@@ -35,9 +35,13 @@ const Login = ({setShowMain})=> {
       console.log(res);
       setShowMain([false, false, true]);
       alert('login success!');
+      return res.data;
     })
     .catch((err)=>{
       alert(err.response.data);
+    })
+    .then((data)=>{
+      setUserInfo(data);
     })
   }
 
