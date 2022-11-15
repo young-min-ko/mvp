@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <div className="top">
-        <Navbar />
+        <Navbar userInfo={userInfo} setUserInfo={setUserInfo}/>
       </div>
 
       <div className="main-page">
@@ -39,7 +39,7 @@ function App() {
         </div>
 
         <div className="right-side">
-          <Main setUserInfo={setUserInfo}/>
+          <Main setUserInfo={setUserInfo} currentPage={currentPage}/>
         </div>
 
       </div>

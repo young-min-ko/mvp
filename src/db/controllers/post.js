@@ -69,8 +69,21 @@ const dbSessionId = (req, res) => {
   })
 }
 
+const dbaddSub = (req, res)=>{
+  console.log(req.body);
+  let queryString = 'INSERT INTO communities (name) VALUES ($1)';
+  return pool.query(queryString, [req.body.name])
+  .then(()=>{
+    res.status(201).end('new community formed');
+  })
+  .catch((err)=>{
+    res.status(404).end('try other names for your community');
+  })
+}
+
 module.exports ={
   dbLogin,
   dbSignup,
   dbSessionId,
+  dbaddSub,
 }

@@ -5,7 +5,8 @@ const path = require('path');
 const app = express();
 const {dbSessionChecker} = require('./middleware/sessionChecker.js')
 const {pool, dbfindUser} = require('../db/db.js');
-const {dbLogin, dbSignup, dbSessionId} = require('../db/controllers/post.js');
+const {dbLogin, dbSignup, dbaddSub} = require('../db/controllers/post.js');
+const {dbTopCommunity} = require('../db/controllers/get.js');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../../build")))
@@ -13,7 +14,7 @@ app.use(dbSessionChecker);
 
 
 // get
-
+app.get('/community', dbTopCommunity)
 // post
 app.post('/signup', (req, res)=>{
   dbfindUser(req, res)
@@ -64,6 +65,8 @@ app.post('/login', (req, res)=>{
     res.status(404).end('login failed');
   })
 });
+
+app.post('/addsubforum', dbaddSub)
 // put
 
 
