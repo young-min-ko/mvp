@@ -9,11 +9,11 @@ import Main from './components/main/Main.js';
 
 function App() {
   const [userInfo, setUserInfo] = useState({});
-  const [currentPage, setCurrentPage] = useState('main');
-  const [topCommunity, setTopCommunity] = useState([{name: 'wow', count: 4}, {name: 'wow2', count: 3}, {name: 'wow3', count: 2}, {name: 'wow4', count: 1}, {name: 'wow5', count: 0}]);
-
+  const [currentPage, setCurrentPage] = useState(['main', 0,[]]); //community name, community id, searchResults
+  const [postlist, setPostlist] = useState([]);
+  const [topCommunity, setTopCommunity] = useState([]);
   const getTopcommunity = ()=>{
-    axios.get('/community')
+    return axios.get('/community')
     .then((res)=>{
       if (res.data.length > 0) {
         setTopCommunity(res.data);
@@ -24,11 +24,38 @@ function App() {
       alert('error fetching top communities');
     })
   }
-  useEffect(getTopcommunity,[]);
+  const getPosts = ()=>{
+    let params = {community_id: currentPage[1]}
+    axios.get('/posts',{params})
+    .then(res=>{
+      console.log(res.data);
+      setPostlist(res.data);
+    })
+    .catch(err=>{
+      console.log(err);
+      alert('owo')
+    })
+  }
+  useEffect(()=>{
+    if (document.cookie.length !== 0 && Object.keys(userInfo).length === 0) {
+      axios.get('/cookielogin')
+      .then(res=>{
+        console.log(res.data);
+        setUserInfo(res.data);
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+      .then(()=>(getTopcommunity()))
+    } else {
+      getTopcommunity();
+    }
+  },[]);
+  useEffect(getPosts, [currentPage])
   return (
     <div className="App">
       <div className="top">
-        <Navbar userInfo={userInfo} setUserInfo={setUserInfo}/>
+        <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
       </div>
 
       <div className="main-page">
@@ -39,7 +66,7 @@ function App() {
         </div>
 
         <div className="right-side">
-          <Main setUserInfo={setUserInfo} currentPage={currentPage}/>
+          <Main setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} userInfo={userInfo} currentPage={currentPage} postlist={postlist}/>
         </div>
 
       </div>

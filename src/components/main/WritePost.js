@@ -1,6 +1,7 @@
 import {useState} from 'react';
+import axios from 'axios';
 
-const WritePost = ()=> {
+const WritePost = ({userInfo, setShowMain})=> {
   const [postInput, setPostInput] = useState(['', ''])
 
   // onChange
@@ -20,8 +21,23 @@ const WritePost = ()=> {
   }
   // onsubmit
   const postOnSubmit = (e)=>{
-    e.preventDefault();
+    let body = {...userInfo};
+    body.community_id = 1;
+    body.title =postInput[0];
+    body.body = postInput[1];
+    axios.post('/addpost', body)
+    .then(res=>{
+      console.log(res.data);
+      setShowMain([false, true, false])
+    })
+    .catch(err=>{
+      console.log(err.response.data);
+    })
     console.log(postInput[0],postInput[1]);
+  }
+  // onclick
+  const buttonOnClick = ()=>{
+    setShowMain([false, true, false]);
   }
   return (
     <div>
@@ -33,7 +49,7 @@ const WritePost = ()=> {
       <textarea placeholder="write what you want" type='text' cols="40" rows="5" value={postInput[1]} onChange={postOnChange}></textarea>
       </label>
       <input type="submit"></input>
-      {/* <button onClick={onClickGoBack}>go back</button> */}
+      <button onClick={buttonOnClick}>go back</button>
     </form>
   </div>
   )

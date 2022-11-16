@@ -3,26 +3,27 @@ const argon2 = require('argon2');
 
 const dbLogin = (req, res)=>{
   console.log(req.body);
-  let queryString = 'SELECT first_name, last_name, username, moto, signup_date FROM users WHERE username = $1';
+  let queryString = 'SELECT id, first_name, last_name, username, moto, signup_date FROM users WHERE username = $1';
   return pool.query(queryString, [req.body.username])
   .then((data)=>{
     let info = data.rows[0];
     console.log(data.rows[0]);
-    dbSessionId(req, res)
+    return dbSessionId(req, res)
     .then((data)=>{
       console.log(info);
-      console.log(data);
-      info.session_id = data.rows[0].session_id;
+      console.log(data.rows);
       console.log(info);
+      res.cookie('session_id', data.rows[0].session_id);
+      res.status(200);
       res.send(info);
     })
-    .catch((err)=>{
-      console.log(err);
-      res.status(404).end(err.detail);
-    });
+    .catch(err=>{
+      console.log('here',err);
+    })
   })
   .catch((err)=>{
-    res.status(404).end(err);
+    console.log('there',err);
+    res.status(404).send(err);
   })
 
 }
@@ -41,7 +42,7 @@ const dbSignup = (req, res)=>{
     .then(data=>{
       console.log(data);
       req.body.session_id = data.rows[0].session_id;
-      res.send(req.body);
+      res.cookie('session_id', data.rows[0].session_id).send(req.body);
     })
     .catch((err)=>{
       console.log(err);
@@ -81,9 +82,38 @@ const dbaddSub = (req, res)=>{
   })
 }
 
+const dbaddPost = (req, res)=>{
+  console.log(req.body);
+  let queryString = "INSERT INTO posts (user_id, community_id, title, body) VALUES ($1, $2, $3, $4)"
+  return pool.query(queryString, [req.body.id, req.body.community_id, req.body.title, req.body.body])
+  .then(data=>{
+    res.send('post complete');
+  })
+  .catch(err=>{
+    console.log(err);
+    res.status(404).send('posting failed');
+  })
+}
+
+const dbSearch = (req, res)=>{
+  console.log(req.body);
+  let queryString = "SELECT * FROM communities WHERE name::text LIKE $1";
+  pool.query(queryString,["%"+req.body.search+"%"])
+  .then(data=>{
+    console.log(data);
+    res.send(data.rows);
+  })
+  .catch(err=>{
+    console.log(err);
+    res.status(404).end('err searching')
+  })
+}
+
 module.exports ={
   dbLogin,
   dbSignup,
   dbSessionId,
   dbaddSub,
+  dbaddPost,
+  dbSearch,
 }

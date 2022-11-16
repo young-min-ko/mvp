@@ -33,25 +33,17 @@ const Login = ({setShowMain, setUserInfo})=> {
     axios.post('/login', body)
     .then((res)=>{
       console.log(res);
-      setShowMain([false, false, true]);
+      setUserInfo(res.data);
       alert('login success!');
-      return res.data;
     })
     .catch((err)=>{
-      alert(err.response.data);
-    })
-    .then((data)=>{
-      if(typeof data === 'object'){
-        setUserInfo(data);
-      }
-    })
-    .catch((err)=> {
       console.log(err);
+      alert(err.response.data);
     })
   }
 
   const onClickSignup = ()=>{
-    setShowMain([false, true, false]);
+    setShowMain([true, false, false]);
   }
   return (
     <div>

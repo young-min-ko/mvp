@@ -1,6 +1,7 @@
 import {useState} from 'react';
+import axios from 'axios';
 
-const Search = () => {
+const Search = ({setCurrentPage, currentPage}) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // onchange
@@ -10,7 +11,17 @@ const Search = () => {
   // onclick
   const searchOnClick = () =>{
     console.log(searchTerm);
-    alert(searchTerm);
+    let body = {search: searchTerm};
+    axios.post('/search', body)
+    .then(res=>{
+      console.log(res.data);
+      let currentPageCopy = currentPage.slice();
+      currentPageCopy[2] = res.data;
+      setCurrentPage(currentPageCopy);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
   }
   return (
     <>

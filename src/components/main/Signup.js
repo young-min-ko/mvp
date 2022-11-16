@@ -89,7 +89,7 @@ const Signup = ({setShowMain, setUserInfo})=>{
       alert(err.response.data);
     })
     .then(()=>{
-      setShowMain([false, false, true]);
+      setShowMain([false, true, false]);
     })
     .catch((err)=>{
       console.log(err);
@@ -97,7 +97,7 @@ const Signup = ({setShowMain, setUserInfo})=>{
   }
 
   const onClickGoBack = ()=>{
-    setShowMain([true,false,true]);
+    setShowMain([false, true, false]);
   }
   return (
     <div>

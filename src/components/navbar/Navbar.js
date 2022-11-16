@@ -2,7 +2,7 @@ import Search from './Search.js';
 import {useState} from 'react';
 import axios from 'axios';
 
-const Navbar = ({userInfo, setUserInfo}) =>{
+const Navbar = ({userInfo, setUserInfo, currentPage, setCurrentPage}) =>{
   const [newName, setNewName] = useState('')
   // onChange
   const addSubOnChange = (e)=>{
@@ -22,7 +22,6 @@ const Navbar = ({userInfo, setUserInfo}) =>{
       console.log(err);
       alert('error signing out')
     })
-
   }
   const addSubOnClick = ()=>{
     let body = {name: newName};
@@ -40,7 +39,7 @@ const Navbar = ({userInfo, setUserInfo}) =>{
       <h1>
         hello this is navbar
         </h1>
-        <Search />
+        <Search currentPage={currentPage} setCurrentPage={setCurrentPage}/>
         <label>
           <input placeholder="type your new forum's name" type="text" value={newName} onChange={addSubOnChange}></input>
         <button onClick={addSubOnClick}>add a subforum</button>
