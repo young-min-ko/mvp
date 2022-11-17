@@ -73,8 +73,6 @@ function App() {
       <div className="top">
         <Navbar sessionIdLogOut={sessionIdLogOut} userInfo={userInfo} setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
       </div>
-      <button onClick={toggle}>wow</button>
-      <Visualize toggle={toggle} visible={visible} userInfo={userInfo}/>
       <div className="main-page">
 
         <div className="left-side">

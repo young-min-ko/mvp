@@ -134,12 +134,17 @@
   background: white;
   border-radius: 5px;
   width: 80vw;
-  height: 80vh;
+  height: auto;
   position: fixed;
   top: 50%;
   left: 50%;
   z-index: 9;
   transform: translate(-50%, -50%);
+}
+.visualize .visualize-pop .comments {
+  height: 60vh;
+  width: auto;
+  overflow: scroll;
 }
 .visualize .visualize-pop .post {
   border-radius: 5px;

@@ -28,9 +28,11 @@ const Visualize = ({ visible, toggle, userInfo }) => {
           <button onClick={toggle}>close</button>
           <button onClick={toggleWriteComment}>add comment</button>
           {writeComment ? <CommentInput toggleWriteComment={toggleWriteComment} userInfo={userInfo} visible={visible} toggle={toggle}/> :null}
+          <div className="comments">
           {visible[1].type === 'post' && !writeComment ? visible[1].data[1].map(comment => {
             return <Comments comment={comment} />;
           }) : null}
+          </div>
         </div>
         <div className="visualize-overlay"></div>
       </div>
