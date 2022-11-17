@@ -7,7 +7,8 @@
   border-radius: 5px;
   overflow: hidden;
   overflow-wrap: break-word;
-  .forum-name{
+
+  .forum-name {
     color: white;
     font-size: 3.2vh;
     background-color: #004385;
@@ -16,15 +17,40 @@
     padding-bottom: 1vh;
     margin-top: 0;
   }
-  .login{
+
+  .login {
     padding-top: 1vh;
     padding-left: 1vw;
     color: white;
   }
-  label{
+
+  .search-result {
+    background-color: white;
+    margin-top: 0;
+    margin-bottom: 0;
+    h1{
+      font-size: 2vh;
+      border: solid;
+      padding-left: 2vw;
+      margin: 0;
+    }
+  }
+
+  .search-result-title {
+    background-color: white;
+    margin-top: 0;
+    font-size: 2.5vh;
+    padding-top: 0.3vh;
+    padding-left: 3vw;
+    padding-bottom: 0.3vh;
+    margin-bottom: 0;
+  }
+
+  label {
     display: block;
   }
-  .post{
+
+  .post {
     border-radius: 5px;
     background-color: beige;
     width: 54vw;
@@ -32,27 +58,31 @@
     margin: auto;
     margin-top: 1vh;
     margin-bottom: 1vh;
-    .post-username{
-      padding:0.3vh;
+
+    .post-username {
+      padding: 0.3vh;
       margin-bottom: 0;
       font-size: 1.5vh;
-      margin-top:0.3vh;
+      margin-top: 0.3vh;
     }
-    .post-author{
+
+    .post-author {
       font-size: 1.5vh;
       margin: 0;
       padding: 0.3vh;
     }
-    .post-title{
+
+    .post-title {
       background-color: white;
       margin-top: 0;
       font-size: 2.5vh;
       padding-top: 0.3vh;
       padding-left: 3vw;
       padding-bottom: 0.3vh;
-      margin-bottom:0;
+      margin-bottom: 0;
     }
-    .post-body{
+
+    .post-body {
       padding-left: 3vw;
       padding-right: 3vw;
       padding-top: 0;

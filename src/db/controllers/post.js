@@ -132,6 +132,20 @@ const dbJoinSub = (req, res)=>{
   })
 }
 
+const dbPostComment = (req, res) =>{
+  console.log(req.body);
+  let queryString = 'INSERT INTO comments (user_id, post_id, body) VALUES ( $1, $2, $3 )';
+  return pool.query(queryString, [req.body.user_id, req.body.post_id, req.body.body])
+  .then(data=>{
+    console.log(data);
+    res.status(201).send('comment posted');
+  })
+  .catch(err=>{
+    console.log(err);
+    res.status(404).send('posting comment failed');
+  })
+}
+
 module.exports ={
   dbLogin,
   dbSignup,
@@ -139,5 +153,6 @@ module.exports ={
   dbaddSub,
   dbaddPost,
   dbSearch,
-  dbJoinSub
+  dbJoinSub,
+  dbPostComment
 }

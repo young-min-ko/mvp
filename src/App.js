@@ -16,6 +16,11 @@ function App() {
   const [topCommunity, setTopCommunity] = useState([]);
   const {toggle, visible} = useModal();
 
+  const sessionIdLogOut = ()=>{
+    setUserInfo({});
+    alert('session expired please login again');
+  }
+
   const getTopcommunity = ()=>{
     return axios.get('/community')
     .then((res)=>{
@@ -37,7 +42,7 @@ function App() {
     })
     .catch(err=>{
       console.log(err);
-      alert('session expired')
+      alert('error fetching posts')
     })
   }
   useEffect(()=>{
@@ -49,9 +54,15 @@ function App() {
       })
       .catch(err=>{
         console.log(err);
-        getPosts();
+        setUserInfo({})
+        alert('session expired')
       })
       .then(()=>(getTopcommunity()))
+      .catch(err=>{
+        alert('error fetching Top communities');
+      })
+      .then(()=>getPosts())
+      .catch((err)=>alert('error fetching posts'));
     } else {
       getTopcommunity();
     }
@@ -60,10 +71,10 @@ function App() {
   return (
     <div className="App">
       <div className="top">
-        <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+        <Navbar sessionIdLogOut={sessionIdLogOut} userInfo={userInfo} setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
       </div>
       <button onClick={toggle}>wow</button>
-      <Visualize toggle={toggle} visible={visible}/>
+      <Visualize toggle={toggle} visible={visible} userInfo={userInfo}/>
       <div className="main-page">
 
         <div className="left-side">
@@ -72,7 +83,7 @@ function App() {
         </div>
 
         <div className="right-side">
-          <Main setUserInfo={setUserInfo} getPosts={getPosts} setCurrentPage={setCurrentPage} userInfo={userInfo} currentPage={currentPage} postlist={postlist}/>
+          <Main setUserInfo={setUserInfo} getPosts={getPosts} setCurrentPage={setCurrentPage} userInfo={userInfo} currentPage={currentPage} postlist={postlist} sessionIdLogOut={sessionIdLogOut}/>
         </div>
 
       </div>

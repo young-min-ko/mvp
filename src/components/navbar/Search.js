@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-const Search = ({setCurrentPage, currentPage}) => {
+const Search = ({setCurrentPage, currentPage, sessionIdLogOut}) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   // onchange
@@ -21,6 +21,9 @@ const Search = ({setCurrentPage, currentPage}) => {
     })
     .catch(err=>{
       console.log(err);
+      if (err.response.data === "session expired please login again") {
+        sessionIdLogOut();
+      }
     })
   }
   return (

@@ -2,7 +2,7 @@ import Search from './Search.js';
 import {useState} from 'react';
 import axios from 'axios';
 
-const Navbar = ({userInfo, setUserInfo, currentPage, setCurrentPage}) =>{
+const Navbar = ({userInfo, setUserInfo, currentPage, setCurrentPage,sessionIdLogOut}) =>{
   const [newName, setNewName] = useState('')
   // onChange
   const addSubOnChange = (e)=>{
@@ -31,7 +31,10 @@ const Navbar = ({userInfo, setUserInfo, currentPage, setCurrentPage}) =>{
     })
     .catch(err=>{
       console.log(err.response.data);
-      alert(err.response.data);
+      if(err.response.data === "session expired please login again"){
+
+        sessionIdLogOut();
+      };
     })
   }
   return (
@@ -39,7 +42,7 @@ const Navbar = ({userInfo, setUserInfo, currentPage, setCurrentPage}) =>{
       <h1>
         hello this is navbar
         </h1>
-        <Search currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+        <Search currentPage={currentPage} setCurrentPage={setCurrentPage} sessionIdLogOut={sessionIdLogOut}/>
         <label>
           <input className="navbar-forum-input" placeholder="new forum name" type="text" value={newName} onChange={addSubOnChange}></input>
         <button onClick={addSubOnClick}>add a subforum</button>

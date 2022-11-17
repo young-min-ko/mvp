@@ -11,9 +11,23 @@ const dbTopCommunity = (req, res)=> {
     console.log(err);
     res.status(404).end('cannot find');
   })
+}
 
+const dbComments = (req, res)=>{
+  console.log(req.query);
+  let queryString ="SELECT users.first_name, users.last_name, users.username as username, commentArr.id as comment_id, commentArr.body as body FROM users INNER JOIN (SELECT * FROM comments WHERE post_id = $1) AS commentArr ON commentArr.user_id = users.id";
+  return pool.query(queryString, [req.query.post_id])
+  .then(data=>{
+    console.log(data.rows);
+    res.send(data.rows);
+  })
+  .catch(err=>{
+    console.log(err);
+    res.status(401).send('cannot find comments');
+  })
 }
 
 module.exports = {
-  dbTopCommunity
+  dbTopCommunity,
+  dbComments
 }

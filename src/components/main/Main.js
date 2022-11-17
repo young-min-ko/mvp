@@ -7,7 +7,7 @@ import axios from 'axios';
 import {useState} from 'react';
 
 
-const Main = ({userInfo, setUserInfo, currentPage, setCurrentPage, postlist, getPosts})=>{
+const Main = ({userInfo, setUserInfo, currentPage, setCurrentPage, postlist, getPosts, sessionIdLogOut})=>{
   const [showMain, setShowMain] = useState([false, true, false])
   // onclick
   const postOnClick = ()=>{
@@ -26,6 +26,9 @@ const Main = ({userInfo, setUserInfo, currentPage, setCurrentPage, postlist, get
     })
     .catch(err=>{
       console.log(err);
+      if (err.response.data === "session expired please login again") {
+        sessionIdLogOut();
+      }
     })
   }
   return (
@@ -39,9 +42,9 @@ const Main = ({userInfo, setUserInfo, currentPage, setCurrentPage, postlist, get
       {Object.keys(userInfo).length === 0 && !showMain[0]? <Login setShowMain={setShowMain} setUserInfo={setUserInfo}/>: null}
       {showMain[0] ? <Signup setShowMain={setShowMain} setUserInfo={setUserInfo}/>: null}
       {showMain[1] ? postlist.map(post=>{
-        return <Post post={post} />;
+        return <Post post={post} userInfo={userInfo}/>;
       }) : null}
-      {showMain[2] && Object.keys(userInfo).length !== 0 ? <WritePost getPosts={getPosts} userInfo={userInfo} setShowMain={setShowMain} currentPage={currentPage}/>: null}
+      {showMain[2] && Object.keys(userInfo).length !== 0 ? <WritePost sessionIdLogOut={sessionIdLogOut} getPosts={getPosts} userInfo={userInfo} setShowMain={setShowMain} currentPage={currentPage}/>: null}
     </div>
   )
 }

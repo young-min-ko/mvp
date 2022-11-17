@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-const WritePost = ({userInfo, setShowMain, currentPage, getPosts})=> {
+const WritePost = ({userInfo, setShowMain, currentPage, getPosts, sessionIdLogOut})=> {
   const [postInput, setPostInput] = useState(['', ''])
 
   // onChange
@@ -40,7 +40,9 @@ const WritePost = ({userInfo, setShowMain, currentPage, getPosts})=> {
       setShowMain([false, true, false])
     })
     .catch(err=>{
-      console.log(err.response.data);
+      if (err.response.data === "session expired please login again") {
+        sessionIdLogOut()
+      };
     })
     .then(()=>{
       getPosts();

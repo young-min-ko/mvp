@@ -6,8 +6,8 @@ const path = require('path');
 const app = express();
 const {dbSessionChecker} = require('./middleware/sessionChecker.js')
 const {pool, dbfindUser} = require('../db/db.js');
-const {dbLogin, dbSignup, dbaddSub, dbaddPost, dbSearch, dbJoinSub} = require('../db/controllers/post.js');
-const {dbTopCommunity} = require('../db/controllers/get.js');
+const {dbLogin, dbSignup, dbaddSub, dbaddPost, dbSearch, dbJoinSub, dbPostComment} = require('../db/controllers/post.js');
+const {dbTopCommunity, dbComments} = require('../db/controllers/get.js');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../../build")))
@@ -17,6 +17,7 @@ app.use(dbSessionChecker);
 
 // get
 app.get('/community', dbTopCommunity)
+app.get('/comments', dbComments)
 app.get('/posts',(req, res)=>{
   console.log(req.query);
   let queryString = "SELECT posts.id, community_id, user_id, first_name, last_name, username, signup_date, title, body FROM posts INNER JOIN users ON users.id = posts.user_id AND posts.community_id = $1"
@@ -90,6 +91,8 @@ app.post('/addsubforum', dbaddSub)
 app.post('/addpost', dbaddPost)
 
 app.post('/join', dbJoinSub)
+
+app.post('/comments', dbPostComment)
 // put
 
 
