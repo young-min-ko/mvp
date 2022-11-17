@@ -5,6 +5,8 @@ import Navbar from './components/navbar/Navbar.js';
 import Profile from './components/profile/Profile.js';
 import TopCommunity from './components/top-community/TopCommunity.js';
 import Main from './components/main/Main.js';
+import useModal from './components/visualize/useModal.js';
+import Visualize from './components/visualize/Visualize.js';
 
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState(['main', 0,[]]); //community name, community id, searchResults
   const [postlist, setPostlist] = useState([]);
   const [topCommunity, setTopCommunity] = useState([]);
+  const {toggle, visible} = useModal();
+
   const getTopcommunity = ()=>{
     return axios.get('/community')
     .then((res)=>{
@@ -33,7 +37,7 @@ function App() {
     })
     .catch(err=>{
       console.log(err);
-      alert('owo')
+      alert('session expired')
     })
   }
   useEffect(()=>{
@@ -45,6 +49,7 @@ function App() {
       })
       .catch(err=>{
         console.log(err);
+        getPosts();
       })
       .then(()=>(getTopcommunity()))
     } else {
@@ -57,7 +62,8 @@ function App() {
       <div className="top">
         <Navbar userInfo={userInfo} setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
       </div>
-
+      <button onClick={toggle}>wow</button>
+      <Visualize toggle={toggle} visible={visible}/>
       <div className="main-page">
 
         <div className="left-side">
@@ -66,7 +72,7 @@ function App() {
         </div>
 
         <div className="right-side">
-          <Main setUserInfo={setUserInfo} setCurrentPage={setCurrentPage} userInfo={userInfo} currentPage={currentPage} postlist={postlist}/>
+          <Main setUserInfo={setUserInfo} getPosts={getPosts} setCurrentPage={setCurrentPage} userInfo={userInfo} currentPage={currentPage} postlist={postlist}/>
         </div>
 
       </div>

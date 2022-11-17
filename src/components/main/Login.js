@@ -46,7 +46,7 @@ const Login = ({setShowMain, setUserInfo})=> {
     setShowMain([true, false, false]);
   }
   return (
-    <div>
+    <div className="login">
       <label className="username-input">username:
       <input placeholder="username" type="text" value={loginInfo[0]} onChange={onChangeLogin}></input>
       <button onClick={onClickLogin}>login</button>

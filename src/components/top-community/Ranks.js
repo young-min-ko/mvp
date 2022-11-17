@@ -1,7 +1,12 @@
 const Ranks = ({community})=>{
 
   return (
-    <li>{community.name+'  members: '+community.members}</li>
+    <li>
+      {community.name}
+      <div>
+      {'members: '+community.members}
+      </div>
+    </li>
   )
 }
 

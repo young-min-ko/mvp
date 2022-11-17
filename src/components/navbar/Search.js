@@ -25,8 +25,8 @@ const Search = ({setCurrentPage, currentPage}) => {
   }
   return (
     <>
-    <label>
-      <input placeholder="search" type="text" value={searchTerm} onChange={searchOnChange}></input>
+    <label className="search">
+      <input className="search-input" placeholder="search" type="text" value={searchTerm} onChange={searchOnChange}></input>
     <button onClick={searchOnClick}>search</button>
     </label>
     </>

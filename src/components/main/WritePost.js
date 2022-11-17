@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios from 'axios';
 
-const WritePost = ({userInfo, setShowMain})=> {
+const WritePost = ({userInfo, setShowMain, currentPage, getPosts})=> {
   const [postInput, setPostInput] = useState(['', ''])
 
   // onChange
@@ -21,8 +21,17 @@ const WritePost = ({userInfo, setShowMain})=> {
   }
   // onsubmit
   const postOnSubmit = (e)=>{
+    if (postInput[0].length < 1) {
+      alert('title cannot be empty');
+      return;
+    }
+    if (postInput[1].length < 1) {
+      alert('body cannot be empty');
+      return;
+    }
+    e.preventDefault();
     let body = {...userInfo};
-    body.community_id = 1;
+    body.community_id = currentPage[1];
     body.title =postInput[0];
     body.body = postInput[1];
     axios.post('/addpost', body)
@@ -32,6 +41,12 @@ const WritePost = ({userInfo, setShowMain})=> {
     })
     .catch(err=>{
       console.log(err.response.data);
+    })
+    .then(()=>{
+      getPosts();
+    })
+    .catch((err)=>{
+      alert('erro fetching posts');
     })
     console.log(postInput[0],postInput[1]);
   }

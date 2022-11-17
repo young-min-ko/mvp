@@ -4,7 +4,7 @@ const TopCommunity = ({topCommunity})=>{
 
   return (
     <div className="top-community">
-      <h1>Top community ranking</h1>
+      <h1 className="top-community-title">Top community ranking</h1>
       <ol>
         {topCommunity.length !== 0 ? topCommunity.map((community)=>{
           return <Ranks community={community}/>

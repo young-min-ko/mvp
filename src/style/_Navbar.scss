@@ -1,6 +1,18 @@
 .navbar {
-  background-color: gray;
+  background-color: #004385;
   width: 100vw;
   display: flex;
   margin: auto;
+  align-items: center;
+  color: white;
+  justify-content: space-evenly;
+  button{
+    margin-left: 0.5vw;
+  }
+  .search-input {
+    width: 17vw;
+  }
+  .navbar-forum-input{
+    width: 17vw;
+  }
 }

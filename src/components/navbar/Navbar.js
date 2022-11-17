@@ -41,7 +41,7 @@ const Navbar = ({userInfo, setUserInfo, currentPage, setCurrentPage}) =>{
         </h1>
         <Search currentPage={currentPage} setCurrentPage={setCurrentPage}/>
         <label>
-          <input placeholder="type your new forum's name" type="text" value={newName} onChange={addSubOnChange}></input>
+          <input className="navbar-forum-input" placeholder="new forum name" type="text" value={newName} onChange={addSubOnChange}></input>
         <button onClick={addSubOnClick}>add a subforum</button>
         </label>
         <button onClick={signOutOnClick}>sign out</button>

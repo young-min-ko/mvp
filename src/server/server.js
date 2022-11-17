@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 const {dbSessionChecker} = require('./middleware/sessionChecker.js')
 const {pool, dbfindUser} = require('../db/db.js');
-const {dbLogin, dbSignup, dbaddSub, dbaddPost, dbSearch} = require('../db/controllers/post.js');
+const {dbLogin, dbSignup, dbaddSub, dbaddPost, dbSearch, dbJoinSub} = require('../db/controllers/post.js');
 const {dbTopCommunity} = require('../db/controllers/get.js');
 
 app.use(express.json());
@@ -88,6 +88,8 @@ app.post('/login', (req, res)=>{
 app.post('/addsubforum', dbaddSub)
 
 app.post('/addpost', dbaddPost)
+
+app.post('/join', dbJoinSub)
 // put
 
 

@@ -1,4 +1,16 @@
 .top-community {
-  background-color: blue;
+  background-color: white;
   width: 30vw;
+  border-radius: 5px;
+  overflow:hidden;
+  font-size: 2vh;
+  .top-community-title{
+    color: white;
+    font-size: 3.2vh;
+    background-color: #004385;
+    padding-top: 1vh;
+    padding-left: 3vw;
+    padding-bottom: 1vh;
+    margin-top: 0;
+  }
 }

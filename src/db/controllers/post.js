@@ -109,6 +109,29 @@ const dbSearch = (req, res)=>{
   })
 }
 
+const dbJoinSub = (req, res)=>{
+  console.log(req.body);
+  let queryString = 'SELECT id FROM user_community WHERE user_id = $1 AND community_id = $2';
+  let queryString1 = 'INSERT INTO user_community (user_id, community_id) VALUES ($1, $2)';
+  return pool.query(queryString,[req.body.user_id, req.body.community_id])
+  .then(data=>{
+    if (data.rows.length === 0) {
+      pool.query(queryString1,[req.body.user_id, req.body.community_id])
+      .then(data=>{
+        console.log('joined sub forum');
+        res.status(201).send('joined sub forum');
+      })
+      .catch(err=>{
+        console.log(err);
+        res.status(404).send('could not join sub forum');
+      })
+    } else {
+      console.log('existing id pairs')
+      res.status(401).send('you already joined')
+    }
+  })
+}
+
 module.exports ={
   dbLogin,
   dbSignup,
@@ -116,4 +139,5 @@ module.exports ={
   dbaddSub,
   dbaddPost,
   dbSearch,
+  dbJoinSub
 }

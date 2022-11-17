@@ -5,7 +5,7 @@ const SearchResults = ({setCurrentPage, result, currentPage})=>{
     setCurrentPage([result.name, result.id, []]);
   }
   return (
-    <div onClick={resultOnClick}>
+    <div className="search-result" onClick={resultOnClick}>
       <h1>{result.name}</h1>
     </div>
   )

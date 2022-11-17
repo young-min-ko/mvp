@@ -7,30 +7,135 @@
 }
 
 .main {
-  background-color: gray;
+  background-color: #087CA7;
   width: 60vw;
   height: auto;
+  border-radius: 5px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+}
+.main .forum-name {
+  color: white;
+  font-size: 3.2vh;
+  background-color: #004385;
+  padding-top: 1vh;
+  padding-left: 3vw;
+  padding-bottom: 1vh;
+  margin-top: 0;
+}
+.main .login {
+  padding-top: 1vh;
+  padding-left: 1vw;
+  color: white;
 }
 .main label {
   display: block;
 }
+.main .post {
+  border-radius: 5px;
+  background-color: beige;
+  width: 54vw;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+.main .post .post-username {
+  padding: 0.3vh;
+  margin-bottom: 0;
+  font-size: 1.5vh;
+  margin-top: 0.3vh;
+}
+.main .post .post-author {
+  font-size: 1.5vh;
+  margin: 0;
+  padding: 0.3vh;
+}
+.main .post .post-title {
+  background-color: white;
+  margin-top: 0;
+  font-size: 2.5vh;
+  padding-top: 0.3vh;
+  padding-left: 3vw;
+  padding-bottom: 0.3vh;
+  margin-bottom: 0;
+}
+.main .post .post-body {
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .navbar {
-  background-color: gray;
+  background-color: #004385;
   width: 100vw;
   display: flex;
   margin: auto;
+  align-items: center;
+  color: white;
+  justify-content: space-evenly;
+}
+.navbar button {
+  margin-left: 0.5vw;
+}
+.navbar .search-input {
+  width: 17vw;
+}
+.navbar .navbar-forum-input {
+  width: 17vw;
 }
 
 .profile {
-  background-color: green;
+  background-color: white;
   width: 30vw;
   display: block;
+  border-radius: 5px;
 }
 
 .top-community {
-  background-color: blue;
+  background-color: white;
   width: 30vw;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 2vh;
+}
+.top-community .top-community-title {
+  color: white;
+  font-size: 3.2vh;
+  background-color: #004385;
+  padding-top: 1vh;
+  padding-left: 3vw;
+  padding-bottom: 1vh;
+  margin-top: 0;
+}
+
+.visualize .visualize-pop {
+  background: white;
+  border-radius: 5px;
+  width: 50vw;
+  height: 50vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 9;
+  transform: translate(-50%, -50%);
+}
+.visualize .visualize-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+  opacity: 0.5;
+  background-color: rgb(0, 0, 0);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #05B2DC;
+  margin: 0;
 }
 
 .main-page {
