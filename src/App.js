@@ -5,8 +5,8 @@ import Navbar from './components/navbar/Navbar.js';
 import Profile from './components/profile/Profile.js';
 import TopCommunity from './components/top-community/TopCommunity.js';
 import Main from './components/main/Main.js';
-import useModal from './components/visualize/useModal.js';
-import Visualize from './components/visualize/Visualize.js';
+
+
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(['main', 0,[]]); //community name, community id, searchResults
   const [postlist, setPostlist] = useState([]);
   const [topCommunity, setTopCommunity] = useState([]);
-  const {toggle, visible} = useModal();
+
 
   const sessionIdLogOut = ()=>{
     setUserInfo({});
